@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <input type="text" v-model="msg">
+    {{msg}}
+</div>
+</body>
+<script src="vue.js"></script>
+<script>
+     var vm = new Vue({
+         el:'#app',
+         data:{
+             msg:'aaaa'
+         }
+     })
+    //es5里的 访问器属性
+    Object.defineProperty()
+
+</script>
+</html>
