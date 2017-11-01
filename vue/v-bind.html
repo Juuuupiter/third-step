@@ -17,7 +17,10 @@
        <!--<p :id="p" :text="pp">pppppp</p>-->
         <!--class style-->
        <!--<p :class="classObj">ppppppp</p>-->
-       <p class='aaa' :class="[classA,classB]" >ffffff</p>
+       <!--<p class='aaa' :class="[classA,classB]" >ffffff</p>-->
+    <!--<p :style="{background:bgColor,'font-size':fs}" >ffffff</p>-->
+    <!--<p :style="styleObj" >ffffff</p>-->
+    <p :style="[styleA,styleB]" >ffffff</p>
 </div>
 </body>
 <script src="vue.js"></script>
@@ -26,6 +29,19 @@
     var vm = new Vue({
         el:'#app',
         data:{
+            styleA:{
+                background:'pink',
+                color:'blue'
+            },
+            styleB:{
+               'font-size':'40px'
+            },
+            styleObj:{
+                background:'red',
+                'font-size':'40px'
+            },
+            bgColor:'red',
+            fs:'40px',
             p:'p111',
             pp:'ssss',
             classObj:{
