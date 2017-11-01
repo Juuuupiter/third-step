@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .red{
+            background: red;
+        }
+        .font{
+            font-size: 40px;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+       <!--<p :id="p" :text="pp">pppppp</p>-->
+        <!--class style-->
+       <!--<p :class="classObj">ppppppp</p>-->
+       <p class='aaa' :class="[classA,classB]" >ffffff</p>
+</div>
+</body>
+<script src="vue.js"></script>
+<script>
+
+    var vm = new Vue({
+        el:'#app',
+        data:{
+            p:'p111',
+            pp:'ssss',
+            classObj:{
+                red: true,
+                font: true
+            },
+            classA:'red',
+            classB:'font'
+
+        }
+
+    })
+
+</script>
+</html>
