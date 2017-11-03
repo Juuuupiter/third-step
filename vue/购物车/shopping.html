@@ -8,6 +8,10 @@
             border: 1px solid #000;
             border-collapse: collapse;
         }
+        img{
+            height: 150px;
+            width: 200px;
+        }
     </style>
 </head>
 <body>
@@ -70,46 +74,68 @@
    </table>
 
 
-   <script src="jquery-1.12.4.js"></script>
-   <script>
 
-   $(function () {
-     var html ='<td>'+
-       '<input type="checkbox">'+
-           '</td>'+
-           '<td>'+
-           '<img src="$img" alt="">'+
-           '</td>'+
-           '<td>'+
-           '$product'+
-           '</td>'+
-           '<td>'+
-           '$parts'+
-           '</td>'+
-           '<td>'+
-           '$price'+
-       '</td>'+
-      '<td>'+
-       '<button class="less" >-</button>'+
-           '<input class="money" type="text" value="$num" >'+
-           '<button class="plus">+</button>'+
-           '</td>'+
-           '<td class="total">'+
-           '$total-price'+
-           '</td>'+
-           '<td class="delete">'+
-           '<a href="#">删除</a>'+
-           '</td>';
-
-//       $("#list-body").append(html);
-         $.get('cart.json',{},function(data){
-             var productList = data.result.productList;
-             for(var i=0;i<productList.length;i++){
-                 var result = html.replace('$img',productList[i].productImg).replace
-             }
-
-         },'json')
-   })
-   </script>
 </body>
+<script src="jquery-1.12.4.js"></script>
+<script>
+
+    $(function () {
+        var html ='<tr>'+
+            '<td>'+
+            '<input type="checkbox">'+
+            '</td>'+
+            '<td>'+
+            '<img src="$img" alt="">'+
+            '</td>'+
+            '<td>'+
+            '$product'+
+            '</td>'+
+            '<td>'+
+            '$parts'+
+            '</td>'+
+            '<td>'+
+            '$price'+
+            '</td>'+
+            '<td>'+
+            '<button class="less" >-</button>'+
+            '<input class="money" type="text" value="$num" >'+
+            '<button class="plus">+</button>'+
+            '</td>'+
+            '<td class="total">'+
+            '$total-price'+
+            '</td>'+
+            '<td class="delete">'+
+            '<a href="#">删除</a>'+
+            '</td>'+
+            '</tr>';
+
+        $.get('cart.json',{},function(data){
+            var tbody = $('#list-body');
+            var productList = data.result.productList;
+            for(var i=0;i<productList.length;i++){
+                var result = html.replace('$img',productList[i].productImg).replace('$product',productList[i].productName)
+                    .replace('$price',productList[i].productPrice).replace('$num',productList[i].productQuentity)
+                    .replace('$total-price',productList[i].productPrice*productList[i].productQuentity);
+                var liStr='';
+                for(var j=0;j<productList[i].parts.length;j++){
+                    liStr+='<li>'+productList[i].parts[j].partsName+'</li>'
+                }
+                tbody.append(result.replace('$parts',liStr));
+            }
+        },'json')
+
+        $('#list-body').on('click','.plus',function () {
+            var $input = $(this).prev()
+            $input.val($input.val()*1 + 1)
+        });
+        $('#list-body').on('click','.less',function () {
+            var $input = $(this).next()
+            if($input.val()>0) {
+                $input.val($input.val() * 1 - 1)
+            }else {
+                $input.val(0);
+            }
+        })
+    })
+</script>
 </html>
