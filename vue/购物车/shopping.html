@@ -135,7 +135,11 @@
             }else {
                 $input.val(0);
             }
+        });
+        $('#list-body').on('click','.delete',function () {
+            $(this).parents('tr').remove();
         })
+
     })
 </script>
 </html>
